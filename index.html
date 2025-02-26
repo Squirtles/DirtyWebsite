@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dirty - Streamer & CoD Legend</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-matter-theme">
+    <div class="video-container">
+        <video autoplay loop muted playsinline class="background-video">
+            <source src="https://i.gifer.com/g1D8.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <h1>Dirty</h1>
+            <p>Streamer | CoD Legend | Las Vegas</p>
+        </div>
+    </header>
+
+    <section class="content-grid">
+        <div class="twitch-embed">
+            <h2>Live Stream</h2>
+            <iframe src="https://player.twitch.tv/?channel=dirty&parent=localhost" frameborder="0"
+                allowfullscreen="true" scrolling="no" height="400" width="100%">
+            </iframe>
+        </div>
+
+        <div class="twitch-clips">
+            <h2>Latest Clips</h2>
+            <div class="clip-container">
+                <div class="clip-window">
+                    <iframe
+                        src="https://clips.twitch.tv/embed?clip=MotionlessSpotlessBubbleteaDBstyle-TzjgusbCPQ6lLUwM&parent=localhost"
+                        frameborder="0" allowfullscreen="true" height="200" width="100%" preload="metadata"
+                        onload="this.contentWindow.postMessage({ type: 'play', duration: 2000 }, '*');">
+                    </iframe>
+                    <p><a href="https://clips.twitch.tv/MotionlessSpotlessBubbleteaDBstyle-TzjgusbCPQ6lLUwM"
+                            target="_blank">5 on NOSC ender!!</a></p>
+                </div>
+                <!-- Add more clips here as needed -->
+            </div>
+        </div>
+    </section>
+
+    <section class="bio">
+        <div class="panel">
+            <h2>About Me</h2>
+            <p>I'm Curtis, 31, living in Las Vegas. Full-time creator. I was a part of FaZe for 10 years. Say hello!</p>
+            <p><strong>Business Contact:</strong> <a
+                    href="mailto:fazedirtybusiness@gmail.com">fazedirtybusiness@gmail.com</a></p>
+        </div>
+    </section>
+
+    <section class="donations">
+        <div class="panel">
+            <h2>Support Me</h2>
+            <p>Non-refundable, donations are the best way of supporting :)</p>
+            <a href="https://streamelements.com/dirty/tip" target="_blank" class="donate-btn">Donate Now</a>
+            <div class="tts-info">
+                <h3>🌿 TTS.Monster AI TTS & Sound Bites</h3>
+                <p>Enhance my streams with iconic AI voices and sound bites via <a href="https://tts.monster"
+                        target="_blank">TTS.Monster</a>!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-tabs">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="openTab('videos')">Videos</button>
+            <button class="tab-btn" onclick="openTab('clips')">Clips</button>
+        </div>
+
+        <div id="videos" class="tab-content active">
+            <h2>Top Videos</h2>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=example1" target="_blank">Dirty's Best Sniper Montage</a>
+                </li>
+                <li><a href="https://www.youtube.com/watch?v=example2" target="_blank">10 Years in FaZe: My Journey</a>
+                </li>
+                <li><a href="https://www.youtube.com/watch?v=example3" target="_blank">Live Stream Highlights #5</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="clips" class="tab-content">
+            <h2>Top Clips</h2>
+            <ul>
+                <li><a href="https://clips.twitch.tv/MotionlessSpotlessBubbleteaDBstyle-TzjgusbCPQ6lLUwM"
+                        target="_blank">5 on NOSC ender!!</a></li>
+                <li><a href="https://clips.twitch.tv/example2" target="_blank">Funny TTS Donation Reaction</a></li>
+                <li><a href="https://clips.twitch.tv/example3" target="_blank">Vegas Stream Setup Tour</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Dirty. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Tab switching
+        function openTab(tabName) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tabbuttons = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // Handle iframe play/pause for views
+        window.addEventListener('message', function (event) {
+            if (event.data.type === 'play') {
+                setTimeout(() => {
+                    event.source.postMessage({ type: 'pause' }, '*');
+                }, event.data.duration || 2000); // Play for 2 seconds then pause
+            }
+        });
+    </script>
+</body>
+
+</html>
