@@ -1,0 +1,384 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Dark Matter Theme (Purple Galaxy Lava Lamp with Video and Overlays) */
+body.dark-matter-theme {
+    background: #0a0a1a;
+    /* Deep black base */
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Video Container for Background Video */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    overflow: hidden;
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    /* Slightly reduce video opacity to allow overlays to show through */
+}
+
+/* Purple Galaxy Overlay (Now rendered first, behind the light blue overlay) */
+body.dark-matter-theme::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(128, 43, 140, 0.5) 0%, rgba(43, 43, 255, 0.5) 30%, transparent 70%);
+    z-index: -2;
+    /* Lower z-index to render before the light blue overlay */
+    animation: lavaRise 20s infinite ease-in-out;
+}
+
+/* Light Blue Photoshop "Screen" Effect Overlay (Now rendered on top) */
+body.dark-matter-theme::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(173, 216, 230, 0.25);
+    /* Light blue (#ADD8E6) at 25% opacity */
+    z-index: -1;
+    /* Higher z-index to render after the purple overlay */
+    mix-blend-mode: screen;
+    /* Mimics Photoshop's Screen blending mode */
+}
+
+/* Animation for rising lava blobs in purple galaxy overlay */
+@keyframes lavaRise {
+    0% {
+        background-position: 50% 100%;
+        transform: scale(1);
+    }
+
+    50% {
+        background-position: 50% 0%;
+        transform: scale(1.1);
+    }
+
+    100% {
+        background-position: 50% 100%;
+        transform: scale(1);
+    }
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(90deg, #2b0b2b, #4b004b);
+    border-bottom: 2px solid #802b8c;
+    position: relative;
+    /* Ensure header stays above overlays */
+}
+
+.header-container h1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #d8a8e8;
+    text-shadow: 0 0 10px rgba(216, 168, 232, 0.7), 0 0 20px rgba(128, 43, 140, 0.5);
+}
+
+.header-container p {
+    font-size: 1.3rem;
+    margin-top: 10px;
+    color: #6b6bff;
+    text-shadow: 0 0 5px rgba(43, 43, 255, 0.3);
+}
+
+.content-grid {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+    /* Ensure content stays above overlays */
+}
+
+.twitch-embed,
+.twitch-clips {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    background: rgba(10, 10, 26, 0.8);
+    border: 2px solid #802b8c;
+    animation: pulse 4s infinite ease-in-out;
+    position: relative;
+    /* Ensure iframes stay above overlays */
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 10px rgba(128, 43, 140, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 20px rgba(128, 43, 140, 0.6);
+    }
+}
+
+.twitch-embed h2,
+.twitch-clips h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #d8a8e8;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.5), 0 0 10px rgba(128, 43, 140, 0.3);
+}
+
+.twitch-embed iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    border-radius: 5px;
+}
+
+.clip-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.clip-window {
+    background: rgba(10, 10, 26, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #802b8c;
+    box-shadow: 0 0 10px rgba(128, 43, 140, 0.3);
+    animation: float 6s infinite ease-in-out;
+    position: relative;
+    /* Ensure clips stay above overlays */
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.clip-window iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 5px;
+}
+
+.clip-window p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.clip-window a {
+    color: #d8a8e8;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.3);
+}
+
+.clip-window a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba(216, 168, 232, 0.7);
+}
+
+.bio,
+.donations {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    /* Ensure bio and donations stay above overlays */
+}
+
+.panel {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    background: rgba(10, 10, 26, 0.8);
+    border: 2px solid #802b8c;
+    animation: glow 8s infinite ease-in-out;
+    position: relative;
+    /* Ensure panels stay above overlays */
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 10px rgba(128, 43, 140, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7), 0 0 20px rgba(128, 43, 140, 0.6);
+    }
+}
+
+.panel h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #d8a8e8;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.5), 0 0 10px rgba(128, 43, 140, 0.3);
+}
+
+.panel p {
+    font-size: 1.2rem;
+}
+
+.panel a {
+    color: #d8a8e8;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.3);
+}
+
+.panel a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba(216, 168, 232, 0.7);
+}
+
+.donate-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 5px;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    background: linear-gradient(45deg, #d8a8e8, #802b8c);
+    color: #fff;
+    border: 2px solid #6b6bff;
+    box-shadow: 0 0 10px rgba(216, 168, 232, 0.7);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    /* Ensure button stays above overlays */
+}
+
+.donate-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(216, 168, 232, 1);
+}
+
+.tts-info {
+    margin-top: 20px;
+}
+
+.tts-info h3 {
+    font-size: 1.8rem;
+    color: #6b6bff;
+    text-shadow: 0 0 5px rgba(107, 107, 255, 0.5);
+}
+
+.content-tabs {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    background: rgba(10, 10, 26, 0.8);
+    border: 2px solid #802b8c;
+    position: relative;
+    /* Ensure tabs stay above overlays */
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    background: rgba(20, 20, 40, 0.8);
+    border: 2px solid #802b8c;
+    color: #fff;
+    transition: background 0.3s, transform 0.3s;
+    position: relative;
+    /* Ensure buttons stay above overlays */
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+    background: #d8a8e8;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(216, 168, 232, 0.7);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(10, 10, 26, 0.8);
+    border: 2px solid #802b8c;
+    position: relative;
+    /* Ensure content stays above overlays */
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    color: #d8a8e8;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.5), 0 0 10px rgba(128, 43, 140, 0.3);
+}
+
+.tab-content ul {
+    list-style: none;
+}
+
+.tab-content ul li {
+    margin: 15px 0;
+}
+
+.tab-content ul li a {
+    color: #d8a8e8;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(216, 168, 232, 0.3);
+}
+
+.tab-content ul li a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba(216, 168, 232, 0.7);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    background: rgba(10, 10, 26, 0.8);
+    border-top: 2px solid #802b8c;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    /* Ensure footer stays above overlays */
+}
